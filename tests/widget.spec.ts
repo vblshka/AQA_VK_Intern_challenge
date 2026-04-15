@@ -31,4 +31,20 @@ test.describe('Uchi.ru widget ', () => {
 
     expect(await widgetPage.getTitle()).toEqual('Связь с поддержкой');
   });
+
+    test('has correct name of class after click', async ({ page }) => {
+      await widgetPage.openWidget();
+
+      const articles = await widgetPage.getPopularArticles();
+
+      await articles[2].click();
+
+      const button = page.locator('[data-test="upVote"]');
+
+      await expect(button).toHaveClass('btnWrapper__WrjF5');
+
+      await button.click();
+
+      await expect(button).toHaveClass('btnWrapper__WrjF5 checked__MurYR');
+    });
 });
